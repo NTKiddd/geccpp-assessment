@@ -26,6 +26,19 @@ int main()
         compChoice = 1 + (rand() % 3);  //randomly pick up a number from 1 to 3 for compChoice
 
         livesAnnouce();
+
+        if (playerLives == 0)
+        {
+        cout << "MATCH WINNER: COMPUTER \n";
+        running = false;
+        exit (0);
+        } 
+        else if (compLives == 0)
+        {
+        cout << "MATCH WINNER: PLAYER \n";
+        running = false;
+        exit (0);
+        }
         
         cout << "Computer: " << compChoice << endl;
         cout << "Rock(1), Paper(2), Scissors(3) \n";
@@ -61,29 +74,19 @@ void compareResult()
 {
     if ((playerChoice == 1 && compChoice == 3) || (playerChoice == 2 && compChoice == 1) || (playerChoice == 3 && compChoice == 2))
     {  
-        cout << "You win \n\n";
+        cout << "You win! \n\n";
         compLives = compLives - 1;
     }
     else if ((playerChoice == 3 && compChoice == 1) || (playerChoice == 1 && compChoice == 2) || (playerChoice == 2 && compChoice == 3))
     {
-        cout << "You lose \n\n";
+        cout << "You lose! \n\n";
         playerLives = playerLives - 1;
     }
     else if (playerChoice == compChoice) 
     {
-        cout << "Draw \n\n";
+        cout << "Draw! \n\n";
     }
-    //compare choices and announce the result
-    if (playerLives == 0)
-    {
-        cout << "WINNER: COMPUTER";
-        running = false;
-    } 
-    else if (compLives == 0)
-    {
-        cout << "WINNER: PLAYER";
-        running = false;
-    }
+    //compare choices and announce the result every turn
 }
 
 void livesAnnouce()
