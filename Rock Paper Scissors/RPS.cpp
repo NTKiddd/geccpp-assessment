@@ -44,7 +44,6 @@ int main()
         
         cout << "Computer: " << compChoice << endl;
         cout << "Rock(1), Paper(2), Scissors(3) \n";
-        cin >> playerChoice;
         
         checkValid();
 
@@ -60,7 +59,8 @@ int main()
 
 bool checkValid()
 {
-    
+    cin >> playerChoice;
+
     if (playerChoice > 3 || playerChoice < 1)
     {
         cout << "Please enter a valid value \n";
