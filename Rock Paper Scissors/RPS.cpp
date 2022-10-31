@@ -11,24 +11,26 @@ bool running = true;
 int playerLives = 3;
 int compLives = 3;
 void livesAnnouce();
-string RPS[6] = {"Rock", "Paper", "Scissors", "Rock", "Paper", "Scissors"};
+string RPS[3] = {"Rock", "Paper", "Scissors",};
 string playerchoiceDisplay;
 string compchoiceDisplay;
 
 int main()
 {   
-    srand(time(NULL));
+    srand(time(NULL)); //generates seed
 
     cout << "Game started. \n";
     Sleep(1300);
 
-    while (running)
+    while (running) //while loops keep running until someone live reached 0 and trigger 'running = false'
     {
         system("cls");
         compChoice = 1 + (rand() % 3);  //randomly pick up a number from 1 to 3 for compChoice
 
         livesAnnouce();
 
+        //checks to see if anyone lives reach 0 
+        //if its true, end the game and annouce the winner 
         if (playerLives == 0)
         {
             cout << "MATCH WINNER: COMPUTER \n";
@@ -57,6 +59,8 @@ int main()
     return 0;
 }
 
+// receive and check whether the player input is valid
+// require to re-enter until it valid if it isn't
 bool checkValid()
 {
     cin >> playerChoice;
@@ -70,8 +74,11 @@ bool checkValid()
     {
         return true;
     }
-} //receive playerChoice and check if player enter a valid value (1, 2 or 3)
+} 
 
+//compare results from player and computer
+//annouce who won the turn or if its a draw
+//remove 1 live if someone won
 void compareResult()
 {
     if (playerChoice == 1)
@@ -102,7 +109,6 @@ void compareResult()
     {
         cout << "Draw! \n\n";
     }
-    //compare choices and announce the result every turn
 }
 
 void livesAnnouce()
