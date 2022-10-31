@@ -5,13 +5,15 @@ using namespace std;
 
 int playerChoice;
 int compChoice;
-string playerchoiceDisplay;
 bool checkValid();
 void compareResult();
 bool running = true;
 int playerLives = 3;
 int compLives = 3;
 void livesAnnouce();
+string RPS[6] = {"Rock", "Paper", "Scissors", "Rock", "Paper", "Scissors"};
+string playerchoiceDisplay;
+string compchoiceDisplay;
 
 int main()
 {   
@@ -29,15 +31,15 @@ int main()
 
         if (playerLives == 0)
         {
-        cout << "MATCH WINNER: COMPUTER \n";
-        running = false;
-        exit (0);
+            cout << "MATCH WINNER: COMPUTER \n";
+            running = false;
+            exit (0);
         } 
         else if (compLives == 0)
         {
-        cout << "MATCH WINNER: PLAYER \n";
-        running = false;
-        exit (0);
+            cout << "MATCH WINNER: PLAYER \n";
+            running = false;
+            exit (0);
         }
         
         cout << "Computer: " << compChoice << endl;
@@ -47,8 +49,8 @@ int main()
         checkValid();
 
         if (checkValid() == true)
-        {
-            Sleep(500);
+        {     
+            Sleep(700);
             compareResult();
         }
         Sleep(2500);
@@ -72,6 +74,20 @@ bool checkValid()
 
 void compareResult()
 {
+    if (playerChoice == 1)
+        cout << "You: " << RPS[0] << "\n";
+    else if (playerChoice == 2)
+        cout << "You: " << RPS[1] << "\n";
+    else if (playerChoice == 3)
+        cout << "You: " << RPS[2] << "\n";
+        
+    if (compChoice == 1)
+        cout << "Computer: " << RPS[0] << "\n\n";
+    else if (compChoice == 2)
+        cout << "Computer: " << RPS[1] << "\n\n";
+    else if (compChoice == 3)
+        cout << "Computer: " << RPS[2] << "\n\n";
+
     if ((playerChoice == 1 && compChoice == 3) || (playerChoice == 2 && compChoice == 1) || (playerChoice == 3 && compChoice == 2))
     {  
         cout << "You win! \n\n";
