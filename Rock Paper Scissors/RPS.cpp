@@ -46,9 +46,9 @@ int main()
         
         cout << "Computer: " << compChoice << endl;
         cout << "Rock(1), Paper(2), Scissors(3) \n";
+        cin >> playerChoice;
         
         checkValid();
-
         if (checkValid() == true)
         {     
             Sleep(700);
@@ -63,7 +63,6 @@ int main()
 // require to re-enter until it valid if it isn't
 bool checkValid()
 {
-    cin >> playerChoice;
 
     if (playerChoice > 3 || playerChoice < 1)
     {
