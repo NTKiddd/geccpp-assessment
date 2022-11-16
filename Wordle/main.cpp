@@ -1,12 +1,16 @@
 #include <iostream>
 #include <fstream>
+<<<<<<< HEAD
 #include <windows.h>
 #include <cstdlib>
 
+=======
+>>>>>>> c248e8e1a5c94d3bea549a7fc157c85d3c9ff199
 using namespace std;
 
 int main()
 {
+<<<<<<< HEAD
     string username;
     int menuChoice;
 
@@ -44,3 +48,8 @@ void playWordle()
             cout << "failed to open file";
     }
 }
+=======
+    ofstream fout;
+    fout.open("text.txt");
+}
+>>>>>>> c248e8e1a5c94d3bea549a7fc157c85d3c9ff199
