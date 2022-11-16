@@ -48,10 +48,11 @@ int main()
         cout << "Rock(1), Paper(2), Scissors(3) \n";
         cin >> playerChoice;
         
+        //only allow program to proceed if checkValid() is true
         checkValid();
         if (checkValid() == true)
         {     
-            Sleep(700);
+            Sleep(600);
             compareResult();
         }
         Sleep(2500);
@@ -93,6 +94,8 @@ void compareResult()
         cout << "Computer: " << RPS[1] << "\n\n";
     else if (compChoice == 3)
         cout << "Computer: " << RPS[2] << "\n\n";
+
+    Sleep(850);
 
     if ((playerChoice == 1 && compChoice == 3) || (playerChoice == 2 && compChoice == 1) || (playerChoice == 3 && compChoice == 2))
     {  
