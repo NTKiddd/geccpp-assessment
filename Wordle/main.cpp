@@ -69,10 +69,15 @@ void playWordle()
             cout << "Enter your guess: ";
             cin >> playerGuess;
             if (playerGuess.size() == 5)
+            {
                 valid = true;
+            }
             else
+            {
                 valid = false;
-                cout << "Reenter";
+                cout << "\n";
+                cout << "Invalid. Please re-enter.\n";
+            }
             
             if (valid)
             {
@@ -98,18 +103,24 @@ void playWordle()
                         cout << playerGuess[j];
                     }
                 }
-                SetConsoleTextAttribute(h, 15);
-            }
+                    SetConsoleTextAttribute(h, 15);
 
-            attempt = attempt - 1;
-            cout << "\n\n";
-            cout << "Attempt left: " << attempt << "\n";
+                attempt = attempt - 1;
+                cout << "\n\n";
+                cout << "Attempt left: " << attempt << "\n";
 
-            if (attempt == 0)
-            {
-                guessing = false;
-                cout << "You dumb.";
-            }
+                if (playerGuess.compare(answerWord) == 0);
+                {
+                    cout << "correct";
+                    guessing = false;
+                }
+
+                if (attempt == 0)
+                {
+                    guessing = false;
+                    cout << "You dumb.";
+                }
+            }   
         }
     }
 }
