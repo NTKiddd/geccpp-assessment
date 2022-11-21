@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <cstdlib>
 #include <string>
+#include <cctype>
 
 using namespace std;
 
@@ -11,9 +12,6 @@ int main()
     void playWordle();
     string username;
     int menuChoice;
-    ofstream userInputFlush;
-
-    userInputFlush.open("trash.txt");
 
     //cout << "ENTER YOUR USERNAME: ";
     //cin >> username;
@@ -40,8 +38,11 @@ int main()
 void playWordle()
 {
     bool playing = true;
+    bool guessing = true;
+    bool valid;
     int wordChoice;
-    char charFound;
+    int charFound;
+    int attempt = 6;
     string playerGuess;
     string answerWord;
     ifstream fin;
@@ -61,15 +62,53 @@ void playWordle()
         wordChoice = 0 + (rand() % 3);
         answerWord = wordList[wordChoice];
         cout << answerWord << "\n";
-        cout << "_____ \n";
-        cout << "Enter your guess: \n";
-        cin >> playerGuess;
-
-        for (int j = 0; j < answerWord.size(); j++)
+        cout << "_ _ _ _ _ \n";
+        
+        while (guessing)
         {
-            if (playerGuess.at(j) == answerWord.at(j))
+            cout << "Enter your guess: ";
+            cin >> playerGuess;
+            if (playerGuess.size() == 5)
+                valid = true;
+            else
+                valid = false;
+                cout << "Reenter";
+            
+            if (valid)
             {
-                cout << "found";
+                HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+
+                for (int j = 0; j < answerWord.size(); j++)
+                {
+                    playerGuess[j] = toupper(playerGuess[j]); 
+                    charFound = answerWord.find(playerGuess[j]);
+                    if (playerGuess[j] == answerWord[j])
+                    {
+                        SetConsoleTextAttribute(h, 47);
+                        cout << playerGuess[j];
+                    }
+                    else if (playerGuess[j] != answerWord[j] && charFound != -1)
+                    {
+                        SetConsoleTextAttribute(h, 111);
+                        cout << playerGuess[j];
+                    }
+                    else 
+                    {
+                        SetConsoleTextAttribute(h, 79);
+                        cout << playerGuess[j];
+                    }
+                }
+                SetConsoleTextAttribute(h, 15);
+            }
+
+            attempt = attempt - 1;
+            cout << "\n\n";
+            cout << "Attempt left: " << attempt << "\n";
+
+            if (attempt == 0)
+            {
+                guessing = false;
+                cout << "You dumb.";
             }
         }
     }
