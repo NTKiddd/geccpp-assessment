@@ -6,10 +6,11 @@
 #include <cctype>
 
 using namespace std;
+void playWordle();
+void highScores();
 
 int main()
 {
-    void playWordle();
     string username;
     int menuChoice;
 
@@ -42,6 +43,7 @@ void playWordle()
     bool valid;
     int wordChoice;
     int charFound;
+    int score = 0;
     int attempt = 6;
     string playerGuess;
     string answerWord;
@@ -103,16 +105,17 @@ void playWordle()
                         cout << playerGuess[j];
                     }
                 }
-                    SetConsoleTextAttribute(h, 15);
+                SetConsoleTextAttribute(h, 15);
 
                 attempt = attempt - 1;
                 cout << "\n\n";
                 cout << "Attempt left: " << attempt << "\n";
 
-                if (playerGuess.compare(answerWord) == 0);
+                if (playerGuess.compare(answerWord) == 0)
                 {
                     cout << "correct";
                     guessing = false;
+                    score++;
                 }
 
                 if (attempt == 0)
@@ -125,3 +128,15 @@ void playWordle()
     }
 }
 
+void highScores()
+{
+    string scoreDisplay;
+    ifstream finscore;
+    finscore.open("highscores.txt");
+
+    cout << "HIGH SCORES \n\n";
+    while (!finscore.eof())
+    {
+        finscore >> scoreDisplay;  
+    }
+}
