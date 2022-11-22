@@ -8,14 +8,14 @@
 using namespace std;
 void playWordle();
 void highScores();
+string username;
 
 int main()
 {
-    string username;
     int menuChoice;
 
-    //cout << "ENTER YOUR USERNAME: ";
-    //cin >> username;
+    cout << "ENTER YOUR USERNAME: ";
+    cin >> username;
     cout << "\n";
 
     cout << "Where do you want to proceed? \n";
@@ -43,7 +43,7 @@ void playWordle()
     int wordChoice;
     int charFound;
     int score = 0;
-    int attempt = 6;
+    int attempt;
     string playerGuess;
     string answerWord;
     ifstream finword;
@@ -51,7 +51,7 @@ void playWordle()
     string wordList[3];
     
     finword.open("wordstoguess.txt");
-    foutscore.open("highscores.txt");
+    foutscore.open("highscores.txt", ios::out | ios::ate | ios::in);
 
     for (int i = 0; i < 3; i++)
     {
@@ -66,7 +66,7 @@ void playWordle()
         cout << answerWord << "\n";
         cout << "_ _ _ _ _ \n";
         guessing = true;
-        attempt = 6;
+        attempt = 4;
         cout << score << "\n";
         
         while (guessing)
@@ -124,7 +124,7 @@ void playWordle()
                 if (attempt == 0)
                 {                
                     cout << "You dumb. Your score is " << score;
-                    foutscore << score;
+                    foutscore << username << " " << score << "\n";
                     guessing = false;
                     play = false;
                 }   
@@ -140,9 +140,9 @@ void highScores()
     finscore.open("highscores.txt");
 
     cout << "HIGH SCORES \n\n";
-    while (!finscore.eof())
-    {
-        finscore >> scoreDisplay;  
+    while (getline(finscore, scoreDisplay))
+    {  
         cout << scoreDisplay << "\n";
     }
 }
+
