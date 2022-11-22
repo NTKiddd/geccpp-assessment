@@ -25,12 +25,11 @@ int main()
 
     if (menuChoice == 1)
     {
-        cout << "WORDLE \n\n";
         playWordle();
     }  
     else if (menuChoice == 2)
     {
-        cout << "HIGH SCORES \n\n";
+        highScores();
     }
 
     return 0;
@@ -38,7 +37,7 @@ int main()
 
 void playWordle()
 {
-    bool playing = true;
+    bool play = true;
     bool guessing = true;
     bool valid;
     int wordChoice;
@@ -47,27 +46,32 @@ void playWordle()
     int attempt = 6;
     string playerGuess;
     string answerWord;
-    ifstream fin;
-    ofstream fout;
+    ifstream finword;
+    ofstream foutscore;
     string wordList[3];
-    fin.open("wordstoguess.txt");
+    
+    finword.open("wordstoguess.txt");
+    foutscore.open("highscores.txt");
 
     for (int i = 0; i < 3; i++)
     {
-        getline(fin, wordList[i]);
+        getline(finword, wordList[i]);
     }
 
-    
-    if (playing)
+    while (play)
     {   
         srand(time(NULL));
         wordChoice = 0 + (rand() % 3);
         answerWord = wordList[wordChoice];
         cout << answerWord << "\n";
         cout << "_ _ _ _ _ \n";
+        guessing = true;
+        attempt = 6;
+        cout << score << "\n";
         
         while (guessing)
-        {
+        {   
+            cout << "Attempt left: " << attempt << "\n";
             cout << "Enter your guess: ";
             cin >> playerGuess;
             if (playerGuess.size() == 5)
@@ -108,22 +112,23 @@ void playWordle()
                 SetConsoleTextAttribute(h, 15);
 
                 attempt = attempt - 1;
-                cout << "\n\n";
-                cout << "Attempt left: " << attempt << "\n";
+                cout << "\n";
 
                 if (playerGuess.compare(answerWord) == 0)
                 {
-                    cout << "correct";
-                    guessing = false;
+                    cout << "correct \n\n";
                     score++;
+                    guessing = false;
                 }
 
                 if (attempt == 0)
-                {
+                {                
+                    cout << "You dumb. Your score is " << score;
+                    foutscore << score;
                     guessing = false;
-                    cout << "You dumb.";
-                }
-            }   
+                    play = false;
+                }   
+            }                
         }
     }
 }
@@ -138,5 +143,6 @@ void highScores()
     while (!finscore.eof())
     {
         finscore >> scoreDisplay;  
+        cout << scoreDisplay << "\n";
     }
 }
