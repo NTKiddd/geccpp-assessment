@@ -13,11 +13,10 @@ int main()
     void highScores();
     int menuChoice;
 
-    system("cls");
     cout << "Welcome to Wordle! Where do you want to proceed? \n";
     cout << "(1) Play Wordle \n";
     cout << "(2) View High Scores \n"; 
-    cin >> menuChoice; 
+    cin >> menuChoice; //label and ask for input to access to each options
 
     if (menuChoice == 1)
     {   
@@ -63,13 +62,15 @@ void playWordle()
     finword.open("wordstoguess.txt");
     foutscore.open("highscores.txt", ios::out | ios::ate | ios::in);
 
+    //store all word from file into an array
     for (int i = 0; i < 15; i++)
     {
-        getline(finword, wordLib[i]);
+        getline(finword, wordLib[i]); 
     }
 
     while (play)
     {   
+        //generates seed and number from the seed
         srand(time(NULL));
         wordChoice = 0 + (rand() % 15);
         isWin = false;
@@ -114,13 +115,13 @@ void playWordle()
                     for (int j = 0; j < answerWord.size(); j++)
                     {
                         playerGuess[j] = toupper(playerGuess[j]); 
-                        charFound = answerWord.find(playerGuess[j]);
+                        charFound = answerWord.find(playerGuess[j]); //find if the character existed in the answer string (return -1 means not found)
                         if (playerGuess[j] == answerWord[j])
                         {
                             SetConsoleTextAttribute(h, 47);
                             cout << playerGuess[j];
                         }
-                        else if (playerGuess[j] != answerWord[j] && charFound != -1)
+                        else if (playerGuess[j] != answerWord[j] && charFound != -1) 
                         {
                             SetConsoleTextAttribute(h, 111);
                             cout << playerGuess[j];
@@ -136,6 +137,7 @@ void playWordle()
                     attempt = attempt - 1;
                     cout << "\n\n";
 
+                    //compare guess with answer using 'string.compare()'. return 0 if both are identical
                     if (playerGuess.compare(answerWord) == 0)
                     {
                         cout << "correct \n\n";
@@ -151,6 +153,8 @@ void playWordle()
                         foutscore << username << " " << score << "\n";
                         guessing = false;
                         play = false;
+                        finword.close();
+                        foutscore.close();
                     }   
                 }
             }                
@@ -168,6 +172,8 @@ void highScores()
 
     system("cls");
     cout << "======= HIGH SCORES ======= \n\n";
+
+    //print out all usernames/scores from the file
     while (getline(finscore, scoreDisplay))
     {  
         cout << scoreDisplay << "\n";
@@ -176,5 +182,9 @@ void highScores()
     cin >> choice;
 
     if (choice == 0)
+    {
+        finscore.close();
+        system("cls");
         main();     
+    }
 }
