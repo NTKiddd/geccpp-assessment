@@ -6,25 +6,21 @@
 #include <cctype>
 
 using namespace std;
-void playWordle();
-void highScores();
-string username;
 
 int main()
 {
+    void playWordle();
+    void highScores();
     int menuChoice;
-    /*
-    cout << "ENTER YOUR USERNAME: ";
-    cin >> username;
-    cout << "\n";
-    */
-    cout << "Where do you want to proceed? \n";
+
+    system("cls");
+    cout << "Welcome to Wordle! Where do you want to proceed? \n";
     cout << "(1) Play Wordle \n";
-    cout << "(2) High Scores \n"; 
+    cout << "(2) View High Scores \n"; 
     cin >> menuChoice; 
 
     if (menuChoice == 1)
-    {
+    {   
         playWordle();
     }  
     else if (menuChoice == 2)
@@ -41,29 +37,43 @@ void playWordle()
     bool guessing = true;
     bool inputValid;
     bool wordChoiceValid;
+    bool isWin = false;
     int wordChoice;
     int charFound;
     int score = 0;
     int attempt;
-    int wordUsed[7];
+    int wordUsed[15];
+    string username;
     string playerGuess;
     string answerWord;
     ifstream finword;
     ofstream foutscore;
-    string wordList[7];
+    string wordLib[15];
+
+    system("cls");
+    cout << "ENTER YOUR USERNAME: ";
+    cin >> username;
+    system("cls");
+    cout << "======= WORDLE =======\n\n";
+    cout << "USERNAME: " << username << "\n\n";
+    Sleep(1000);
+    cout << "Let's guess some words! \n";
+    Sleep(1000);
     
     finword.open("wordstoguess.txt");
     foutscore.open("highscores.txt", ios::out | ios::ate | ios::in);
 
-    for (int i = 0; i < 7; i++)
+    for (int i = 0; i < 15; i++)
     {
-        getline(finword, wordList[i]);
+        getline(finword, wordLib[i]);
     }
 
     while (play)
     {   
         srand(time(NULL));
-        wordChoice = 0 + (rand() % 7);
+        wordChoice = 0 + (rand() % 15);
+        isWin = false;
+
         for (int h = 0; h < score; h++)
         {
             if (wordChoice == wordUsed[h])
@@ -71,14 +81,15 @@ void playWordle()
             else
                 wordChoiceValid = true;
         }
+
         if (wordChoiceValid)
         {
-            answerWord = wordList[wordChoice];
+            answerWord = wordLib[wordChoice];
             //cout << answerWord << "\n";
-            cout << "_ _ _ _ _ \n";
+            cout << "_ _ _ _ _ \n\n";
             guessing = true;
             attempt = 6;
-            cout << score << "\n";
+            cout << "Current score: " << score << "\n";
             
             while (guessing)
             {   
@@ -93,7 +104,7 @@ void playWordle()
                 {
                     inputValid = false;
                     cout << "\n";
-                    cout << "Invalid. Please re-enter.\n";
+                    cout << "Invalid, your word need to has 5 letters. Please re-enter.\n";
                 }
                 
                 if (inputValid)
@@ -131,9 +142,10 @@ void playWordle()
                         wordUsed[score] = wordChoice;
                         score++;
                         guessing = false;
+                        isWin = true;
                     }
 
-                    if (attempt == 0)
+                    if (attempt == 0 && !isWin)
                     {                
                         cout << "You dumb. Your score is " << score;
                         foutscore << username << " " << score << "\n";
@@ -148,18 +160,21 @@ void playWordle()
 
 void highScores()
 {
-    int amountOfScores = 0;
-    string scoreTemp;
+    string scoreDisplay;
     ifstream finscore;
     finscore.open("highscores.txt");
+    int choice;
+    int main();
 
-    cout << "HIGH SCORES \n\n";
-    while (getline(finscore, scoreTemp))
+    system("cls");
+    cout << "======= HIGH SCORES ======= \n\n";
+    while (getline(finscore, scoreDisplay))
     {  
-        cout << scoreTemp << "\n";
-        amountOfScores++;
+        cout << scoreDisplay << "\n";
     }
-    cout << "amount of scores: " << amountOfScores;
-    //for (int k; k < amountOfScores; k++)
-}
+    cout << "\n" << "Enter 0 to go back to menu. \n";
+    cin >> choice;
 
+    if (choice == 0)
+        main();     
+}
