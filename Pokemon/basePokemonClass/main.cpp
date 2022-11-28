@@ -9,7 +9,8 @@ using namespace std;
 
 int main()
 {   
-    firePokemon Caraxes;
+    firePokemon1 Caraxes;
+
     int choice;
 
     cin >> choice;

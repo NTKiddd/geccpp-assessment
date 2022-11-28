@@ -22,20 +22,25 @@ firePokemon::firePokemon()
 
 }
 
-firePokemon::~firePokemon()
-{
-    
-}
-
 void firePokemon::fireCharge()
 {
     cout << name << " use Fire Charge";
 }
 
-Caraxes::Caraxes()
+firePokemon::~firePokemon()
+{
+    
+}
+
+firePokemon1::firePokemon1()
 {
     name = "Caraxes";
     health = 150;
     attack = 40;
     defense = 25;
+}
+
+firePokemon1::~firePokemon1()
+{
+
 }
