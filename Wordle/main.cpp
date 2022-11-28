@@ -86,7 +86,7 @@ void playWordle()
         if (wordChoiceValid)
         {
             answerWord = wordLib[wordChoice];
-            //cout << answerWord << "\n";
+            cout << answerWord << "\n";
             cout << "_ _ _ _ _ \n\n";
             guessing = true;
             attempt = 6;
@@ -140,11 +140,14 @@ void playWordle()
                     //compare guess with answer using 'string.compare()'. return 0 if both are identical
                     if (playerGuess.compare(answerWord) == 0)
                     {
-                        cout << "correct \n\n";
+                        cout << "You got the correct word! \n\n";
                         wordUsed[score] = wordChoice;
                         score++;
                         guessing = false;
                         isWin = true;
+                        Sleep(2500);
+                        system("cls");
+                        cout << "Let's guess!";
                     }
 
                     if (attempt == 0 && !isWin)
