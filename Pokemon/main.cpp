@@ -9,11 +9,11 @@ using namespace std;
 
 int main()
 {   
-    firePokemon1 Darmanitan;
-    firePokemon2 Flareon;
-    firePokemon3 Torkoal;
-    firePokemon4 Charizard;
-    firePokemon5 HoOh;
+    firePokemon1 Flareon;
+    firePokemon2 Charizard;
+    firePokemon3 HoOh;
+    firePokemon4 Torkoal;
+    firePokemon5 Darmanitan;
 
     int choice;
 

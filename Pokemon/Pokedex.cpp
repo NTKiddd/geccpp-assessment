@@ -21,7 +21,7 @@ basePokemon::~basePokemon()
 
 firePokemon::firePokemon()
 {
-
+    type = 'F';
 }
 
 firePokemon::~firePokemon()
@@ -29,6 +29,7 @@ firePokemon::~firePokemon()
     
 }
 
+//primary move
 void firePokemon::fireCharge()
 {
     cout << name << " use Fire Charge";
@@ -108,7 +109,7 @@ firePokemon5::~firePokemon5()
 
 waterPokemon::waterPokemon()
 {
-
+    type = 'W';
 }
 
 waterPokemon::~waterPokemon()
@@ -116,6 +117,7 @@ waterPokemon::~waterPokemon()
     
 }
 
+//primary move
 void waterPokemon::waterSplash()
 {
     cout << name << " use Water Splash";
@@ -127,7 +129,7 @@ waterPokemon1::waterPokemon1()
     health = 130;
     attack = 45;
     defense = 50;
-    stamina = 65;
+    stamina = 70;
 }
 
 waterPokemon1::~waterPokemon1()
@@ -138,10 +140,10 @@ waterPokemon1::~waterPokemon1()
 waterPokemon2::waterPokemon2()
 {
     name = "Vaporeon";
-    health = 115;
+    health = 110;
     attack = 55;
     defense = 45;
-    stamina = 75;
+    stamina = 80;
 }
 
 waterPokemon2::~waterPokemon2()
@@ -151,11 +153,11 @@ waterPokemon2::~waterPokemon2()
 
 waterPokemon3::waterPokemon3()
 {
-    name =
-    health =
-    attack = 
-    defense = 
-    stamina = 
+    name = "Poliwrath";
+    health = 120;
+    attack = 60;
+    defense = 50;
+    stamina = 60;
 }
 
 waterPokemon3::~waterPokemon3()
@@ -165,11 +167,11 @@ waterPokemon3::~waterPokemon3()
 
 waterPokemon4::waterPokemon4()
 {
-    name =
-    health =
-    attack = 
-    defense = 
-    stamina = 
+    name = "Swampert";
+    health = 125;
+    attack = 55;
+    defense = 45;
+    stamina = 65;
 }
 
 waterPokemon4::~waterPokemon4()
@@ -179,14 +181,82 @@ waterPokemon4::~waterPokemon4()
 
 waterPokemon5::waterPokemon5()
 {
-    name =
-    health =
-    attack = 
-    defense = 
-    stamina = 
+    name = "Crawdaunt";
+    health = 95;
+    attack = 65;
+    defense = 45;
+    stamina = 80;
 }
 
 waterPokemon5::~waterPokemon5()
+{
+    
+}
+
+/* ---------- GRASS POKEMON ---------- */
+
+grassPokemon::grassPokemon()
+{
+    type = 'G';
+}
+
+grassPokemon::~grassPokemon()
+{
+    
+}
+
+//primary move
+void Leafage()
+{
+
+}
+
+grassPokemon1::grassPokemon1()
+{
+    
+}
+
+grassPokemon1::~grassPokemon1()
+{
+    
+}
+
+grassPokemon2::grassPokemon2()
+{
+    
+}
+
+grassPokemon2::~grassPokemon2()
+{
+    
+}
+
+grassPokemon3::grassPokemon3()
+{
+    
+}
+
+grassPokemon3::~grassPokemon3()
+{
+    
+}
+
+grassPokemon4::grassPokemon4()
+{
+    
+}
+
+grassPokemon4::~grassPokemon4()
+{
+    
+}
+
+grassPokemon5::grassPokemon5()
+{
+    
+}
+
+grassPokemon5::~grassPokemon5()
 {
     
 }
