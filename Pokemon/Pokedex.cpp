@@ -213,7 +213,11 @@ void Leafage()
 
 grassPokemon1::grassPokemon1()
 {
-    
+    name = "Venusaur";
+    health = 120;
+    attack = 60;
+    defense = 50;
+    stamina = 70;
 }
 
 grassPokemon1::~grassPokemon1()
@@ -223,7 +227,11 @@ grassPokemon1::~grassPokemon1()
 
 grassPokemon2::grassPokemon2()
 {
-    
+    name = "Bayleef";
+    health = 95;
+    attack = 55;
+    defense = 60;
+    stamina = 80;
 }
 
 grassPokemon2::~grassPokemon2()
@@ -233,7 +241,11 @@ grassPokemon2::~grassPokemon2()
 
 grassPokemon3::grassPokemon3()
 {
-    
+    name = "Sceptile";
+    health = 110;
+    attack = 70;
+    defense = 55;
+    stamina = 65;
 }
 
 grassPokemon3::~grassPokemon3()
@@ -243,7 +255,11 @@ grassPokemon3::~grassPokemon3()
 
 grassPokemon4::grassPokemon4()
 {
-    
+    name = "Shiftry";
+    health = 125;
+    attack = 60;
+    defense = 75;
+    stamina = 60;
 }
 
 grassPokemon4::~grassPokemon4()
@@ -253,7 +269,11 @@ grassPokemon4::~grassPokemon4()
 
 grassPokemon5::grassPokemon5()
 {
-    
+    name = "Tropius";
+    health = 120;
+    attack = 65;
+    defense = 70;
+    stamina = 70;
 }
 
 grassPokemon5::~grassPokemon5()

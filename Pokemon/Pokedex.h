@@ -11,7 +11,6 @@ class basePokemon
         basePokemon();
         ~basePokemon();
     
-    protected:
         string name;
         char type;
         int id;
@@ -75,7 +74,7 @@ class waterPokemon : public basePokemon
     public:
         waterPokemon();
         ~waterPokemon();
-        void waterSplash(); //primary move
+        void waterSplash(); 
 };
 
 class waterPokemon1 : public waterPokemon

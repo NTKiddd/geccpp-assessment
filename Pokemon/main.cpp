@@ -17,12 +17,14 @@ int main()
 
     int choice;
 
-    cout << "Choose your Pokemons!";
+    //cout << "Choose your Pokemons!";
 
     cin >> choice;
 
     if (choice == 1)
-        Flareon.fireCharge();
+    {
+        cout << 
+    }
 
     return 0;
 }
