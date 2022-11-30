@@ -10,6 +10,7 @@ class basePokemon
     public:
         basePokemon();
         ~basePokemon();
+        void stats();
     
         string name;
         char type;
@@ -156,3 +157,19 @@ class grassPokemon5 : public grassPokemon
         grassPokemon5();
         ~grassPokemon5();
 };
+
+    firePokemon1 Flareon;
+    firePokemon2 Charizard;
+    firePokemon3 HoOh;
+    firePokemon4 Torkoal;
+    firePokemon5 Darmanitan;
+    waterPokemon1 Blastoise;
+    waterPokemon2 Vaporeon;
+    waterPokemon3 Poliwrath;
+    waterPokemon4 Swampert;
+    waterPokemon5 Crawdaunt;
+    grassPokemon1 Venusaur;
+    grassPokemon2 Bayleef;
+    grassPokemon3 Sceptile;
+    grassPokemon4 Shiftry;
+    grassPokemon5 Tropius;

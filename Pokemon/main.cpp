@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <time.h>
 #include <Windows.h>
+#include <fstream>
 
 #include "Pokedex.cpp"
 
@@ -9,22 +10,45 @@ using namespace std;
 
 int main()
 {   
-    firePokemon1 Flareon;
-    firePokemon2 Charizard;
-    firePokemon3 HoOh;
-    firePokemon4 Torkoal;
-    firePokemon5 Darmanitan;
-
     int choice;
+    bool choosing = true;
+    
+    basePokemon aP[15] = {Flareon, Charizard, HoOh, Torkoal, Darmanitan, Blastoise, Vaporeon, Poliwrath, Swampert, Crawdaunt, Venusaur, Bayleef, Sceptile, Shiftry, Tropius};
+    string name[15];
+    string lineup[4];
+    //ifstream finname;
 
-    //cout << "Choose your Pokemons!";
-
-    cin >> choice;
-
-    if (choice == 1)
+    //finname.open("AllPokemonName.txt");
+    while (choosing)
     {
-        cout << 
+        cout << "Choose your Pokemons! \n";
+
+        for (int i = 0; i < 15; i++)
+        {   
+            name[i] = aP[i].name; 
+            cout << "(" << i + 1 << ") " << name[i] << endl;
+        }
+
+        for (int j = 0; j < 4; j++)
+        {
+            cin >> choice;
+
+            cout << "You choose " << name[choice - 1];
+            lineup[j] = name[choice - 1];
+
+            aP[choice - 1].stats();
+
+            
+
+            if (j == 4)
+            {
+                choosing = false;
+            }
+        }
     }
+    cout << "Your lineup: \n";
+    for (int k = 0; k < 4; k++)
+        cout << lineup[k] << "\n";
 
     return 0;
 }

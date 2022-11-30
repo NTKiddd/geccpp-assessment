@@ -17,6 +17,12 @@ basePokemon::~basePokemon()
 
 }
 
+void basePokemon::stats()
+{
+    cout << endl << "Name: " << name << endl << "Type: " << type << endl << "Health: " << health; 
+    cout << endl << "Attack: " << attack << endl << "Defense: " << defense << endl << "Stamina: " << stamina << endl << endl;
+}
+
 /* ---------- FIRE POKEMON ---------- */
 
 firePokemon::firePokemon()
