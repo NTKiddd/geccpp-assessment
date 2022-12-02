@@ -3,6 +3,7 @@
 #include <time.h>
 #include <Windows.h>
 #include <fstream>
+#include <array>
 
 #include "Pokedex.cpp"
 
@@ -11,7 +12,8 @@ using namespace std;
 int main()
 {   
     int choice;
-    int chosen[4];
+    array<int, 4> chosen;
+    bool atChoosingPhase = true;
     bool choosing = true;
     bool choiceValid;
     
@@ -21,10 +23,9 @@ int main()
     //ifstream finname;
 
     //finname.open("AllPokemonName.txt");
-    while (choosing)
+    while (atChoosingPhase)
     {
         cout << "Choose your Pokemons! \n";
-        cout << sizeof(chosen);
 
         for (int i = 0; i < 15; i++)
         {   
@@ -32,40 +33,54 @@ int main()
             cout << "(" << i + 1 << ") " << name[i] << endl;
         }
 
-        for (int j = 0; j < 4; j++)
+        while (choosing)
         {
-            cin >> choice;
-            for (int l = 0; l < 4; l++)
-            {
-                if  (choice == chosen[l])
-                {
-                    cout << "You have chosen this Pokemon. Please choose another one.";
+            for (int j = 0; j < 4;)
+            {   
+                choiceValid = true;
+                cin >> choice;
+                if (choice < 1 || choice > 15)
+                {   
+                    cout << j;
+                    cout << "Invalid. Please re-enter a valid value";
                     choiceValid = false;
                 }
-                else 
-                    choiceValid = true;
-            }
-
-            if (choiceValid)
-            {
-                chosen[j] = choice;
-                
-                cout << "You choose " << name[choice - 1];
-                lineup[j] = name[choice - 1];
-
-                aP[choice - 1].stats();
- 
-
-                if (j == 3)
+                else
                 {
-                    choosing = false;
+                    for (int l = 0; l < 4; l++)
+                    {
+                        if (choice == chosen[l])
+                        {
+                            cout << "You have chosen this Pokemon. Please choose another one. \n";
+                            choiceValid = false;
+                        }
+                    }
+                }
+
+                if (choiceValid)
+                {
+                    chosen[j] = choice;
+                    lineup[j] = name[choice - 1];
+                    j++;
+
+                    cout << "You choose " << name[choice - 1];
+
+                    aP[choice - 1].stats();
+
+                    if (j == 3)
+                    {   
+                        choosing = false;
+                        atChoosingPhase = false;
+                    }
                 }
             }
         }
     }
     cout << "Your lineup: \n";
     for (int k = 0; k < 4; k++)
+    {
         cout << lineup[k] << "\n";
-
+    }
     return 0;
 }
+
