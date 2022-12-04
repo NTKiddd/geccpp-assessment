@@ -31,7 +31,7 @@ class basePokemon
         int stamina;
         int speed;
 
-        void primaryMove();
+        void primaryMove(basePokemon attacker, basePokemon target);
         void secondaryMove();
         void thirdMove();
 };
@@ -43,7 +43,7 @@ class firePokemon : public basePokemon
     public:
         firePokemon();
         ~firePokemon();
-        void primaryMove(basePokemon attacked);
+        void primaryMove();
 };
 
 class firePokemon1 : public firePokemon

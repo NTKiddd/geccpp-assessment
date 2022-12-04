@@ -73,6 +73,12 @@ void basePokemon::setSpeed(int newSpeed)
     health = newSpeed;
 }
 
+void primaryMove(basePokemon attacker, basePokemon target)
+{
+    target.setHealth(target.health - (attacker.attack - target.defense));
+    cout << target.health;
+}
+
 /* ---------- FIRE POKEMON ---------- */
 
 firePokemon::firePokemon()
@@ -85,11 +91,9 @@ firePokemon::~firePokemon()
     
 }
 
-void firePokemon::primaryMove(basePokemon attacked)
+void firePokemon::primaryMove()
 {
     cout << name << " use Fire Charge";
-    attacked.setHealth(attacked.health - (attack - attacked.defense));
-    cout << attacked.health;
 }
 
 firePokemon1::firePokemon1()

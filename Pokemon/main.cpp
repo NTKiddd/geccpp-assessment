@@ -115,7 +115,7 @@ int main()
     */
 
     cout << "Your Pokemon: " << Charizard.name;
-    Charizard.primaryMove(Blastoise);
+    primaryMove(Charizard, Blastoise);
 
     return 0;
 }
