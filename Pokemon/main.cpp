@@ -13,6 +13,7 @@ using namespace std;
 int main()
 {   
     void ClearScreen();
+    int OpponentChoice();
 
     int choice;
     int chosen[4];
@@ -26,9 +27,9 @@ int main()
     string lineup[4];
 
     basePokemon aP[15] = {Flareon, Charizard, HoOh, Torkoal, Darmanitan, Blastoise, Vaporeon, Poliwrath, Swampert, Crawdaunt, Venusaur, Bayleef, Sceptile, Shiftry, Tropius};
-    firePokemon fireTrainer[5] = {Flareon, Charizard, HoOh, Torkoal, Darmanitan};
-    waterPokemon waterTrainer[5] = {Blastoise, Vaporeon, Poliwrath, Swampert, Crawdaunt};
-    grassPokemon grassTrainer[5] = {Venusaur, Bayleef, Sceptile, Shiftry, Tropius};
+    firePokemon fireTrainer[4];
+    waterPokemon waterTrainer[4];
+    grassPokemon grassTrainer[4];
     basePokemon ally;
     basePokemon opponent;
     //ifstream finname;
@@ -69,23 +70,20 @@ int main()
             }
 
             choiceValid = true;
-            while (choosing)
+            cin >> choice;
+            if (choice < 1 || choice > 15)
+            {   
+                cout << "Invalid. Please re-enter a valid value";
+                choiceValid = false;
+            }
+            else
             {
-                cin >> choice;
-                if (choice < 1 || choice > 15)
-                {   
-                    cout << "Invalid. Please re-enter a valid value";
-                    choiceValid = false;
-                }
-                else
+                for (int l = 0; l < 4; l++)
                 {
-                    for (int l = 0; l < 4; l++)
+                    if (choice == chosen[l])
                     {
-                        if (choice == chosen[l])
-                        {
-                            cout << "You have chosen this Pokemon. Please choose another one. \n";
-                            choiceValid = false;
-                        }
+                        cout << "You have chosen this Pokemon. Please choose another one. \n";
+                        choiceValid = false;
                     }
                 }
             }
@@ -117,7 +115,7 @@ int main()
             }
         }
     }
-    cout << "\n" << "Your lineup: \n";
+    cout << "Your lineup: \n";
     for (int k = 0; k < 4; k++)
     {
         cout << lineup[k] << "\n";
@@ -127,12 +125,23 @@ int main()
     _getch();
     ClearScreen();
 
-    cout << "Choose your Opponent \n";
-    cout << "(1) Fire Trainer \n";
-    cout << "(2) Water Trainer \n";
-    cout << "(3) Grass Trainer \n";
-    cout << "(4) Final Trainer \n";
-    
+    OpponentChoice();
+    switch (OpponentChoice())
+    {   
+        int temp[4];
+        srand(time(NULL));
+        for (int i = 0; i < 4; i++)
+        {
+            int random = 0 + (rand() % 5);
+            for (int j = 0; j < 4; j++)
+            {
+                if (random == temp[j])
+                    break;
+                else 
+                    random == temp[i];
+            }
+        }
+    }
     
     ally = Charizard;
     opponent = Venusaur;
@@ -156,27 +165,53 @@ int main()
         {
             case 1:
                 ally.primaryMove(opponent);
-                opponent.takeDamage(ally, command);
-                Sleep(3000);
-                ClearScreen();
                 break;
 
             case 2:
                 //ally.secondaryMove(opponent);
-                opponent.takeDamage(ally, command);
-                Sleep(3000);
-                ClearScreen();
                 break;
 
             case 3:
                 break;
         }
-    }
-    
-    
+        opponent.takeDamage(ally, command);
+        Sleep(3000);
+        ClearScreen();
 
+        if (ally.health <= 0)
+        {
+            ally.health = 0;
+            cout << "Your Pokemon has been defeated! \n";
+        }
+        else if (opponent.health <= 0)
+        {
+            opponent.health = 0;
+            cout << "Opponent's Pokemon has been defeated! \n";
+        }
+    }
     return 0;
 }
+
+int OpponentChoice()
+{
+    cout << "Choose your Opponent \n";
+    cout << "(1) Fire Trainer \n";
+    cout << "(2) Water Trainer \n";
+    cout << "(3) Grass Trainer \n";
+    cout << "(4) Final Trainer \n";
+
+    int choice;
+    cin >> choice;
+
+    return choice;
+}
+
+
+
+
+
+
+
 
 
 
