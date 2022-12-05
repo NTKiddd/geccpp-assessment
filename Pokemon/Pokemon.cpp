@@ -3,7 +3,7 @@
 #include <time.h>
 #include <Windows.h>
 
-#include "Pokedex.h"
+#include "Pokemon.h"
 
 using namespace std;
 
@@ -23,29 +23,15 @@ void basePokemon::stats()
     cout << endl << "Attack: " << attack << endl << "Stamina: " << stamina << endl << endl;
 }
 
-int basePokemon::getHealth()
-{
-    return health;
-}
 
 void basePokemon::setHealth(int newHealth)
 {
     health = newHealth;
 }
 
-int basePokemon::getAttack()
-{
-    return attack;
-}
-
 void basePokemon::setAttack(int newAttack)
 {
-    health = newAttack;
-}
-
-int basePokemon::getDefense()
-{
-    return defense;
+    attack = newAttack;
 }
 
 void basePokemon::setDefense(int newDefense)
@@ -53,36 +39,52 @@ void basePokemon::setDefense(int newDefense)
     defense = newDefense;
 }
 
-int basePokemon::getStamina()
-{
-    return stamina;
-}
-
 void basePokemon::setStamina(int newStamina)
 {
-    health = newStamina;
-}
-
-int basePokemon::getSpeed()
-{
-    return speed;
+    stamina = newStamina;
 }
 
 void basePokemon::setSpeed(int newSpeed)
 {
-    health = newSpeed;
+    speed = newSpeed;
 }
 
-void primaryMove(basePokemon attacker, basePokemon target)
-{
-    target.setHealth(target.health - (attacker.attack - target.defense));
-    cout << target.health;
+void basePokemon::primaryMove(basePokemon target)
+{   
+    //cout << name << " use " << move << " to " << target.name;
+    //setStamina(30);
+}
+
+void basePokemon::takeDamage(basePokemon attacker, int moveType)
+{   
+    switch (moveType)
+    {
+        case 1:
+            if ((type == 'F' && attacker.type == 'W') || (type == 'W' && attacker.type == 'G') || (type == 'G' && attacker.type == 'F'))
+            {
+                setHealth(health - (attacker.attack - defense) * 1.2);
+                cout << "\nCounter! +20% damage";
+            }
+            else
+                setHealth(health - (attacker.attack - defense));
+            break;
+        case 2:
+            if ((type == 'F' && attacker.type == 'W') || (type == 'W' && attacker.type == 'G') || (type == 'G' && attacker.type == 'F'))
+            {
+                setHealth(health - (attacker.attack * 1.4 - defense) * 1.2);
+                cout << "\nCounter! +20% damage";
+            }
+            else
+                setHealth(health - (attacker.attack * 1.4 - defense));
+            break;
+
+    }
 }
 
 /* ---------- FIRE POKEMON ---------- */
 
 firePokemon::firePokemon()
-{
+{ 
     type = 'F';
 }
 
@@ -91,9 +93,9 @@ firePokemon::~firePokemon()
     
 }
 
-void firePokemon::primaryMove()
+void firePokemon1::secondaryMove()
 {
-    cout << name << " use Fire Charge";
+
 }
 
 firePokemon1::firePokemon1()
@@ -354,3 +356,5 @@ grassPokemon5::~grassPokemon5()
 {
     
 }
+
+

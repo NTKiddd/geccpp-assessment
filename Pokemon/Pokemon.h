@@ -11,17 +11,13 @@ class basePokemon
         basePokemon();
         ~basePokemon();
         void stats();
-        int getHealth();
         void setHealth(int newHealth);
-        int getAttack();
         void setAttack(int newAttack);
-        int getDefense();
         void setDefense(int newDefense);
-        int getStamina();
         void setStamina(int newStamina);
-        int getSpeed();
         void setSpeed(int newSpeed);
-    
+
+
         string name;
         char type;
         int id;
@@ -31,9 +27,9 @@ class basePokemon
         int stamina;
         int speed;
 
-        void primaryMove(basePokemon attacker, basePokemon target);
-        void secondaryMove();
+        void primaryMove(basePokemon target);
         void thirdMove();
+        void takeDamage(basePokemon attacker, int moveType);
 };
 
 /* ---------- FIRE POKEMON ---------- */
@@ -43,7 +39,7 @@ class firePokemon : public basePokemon
     public:
         firePokemon();
         ~firePokemon();
-        void primaryMove();
+        void secondaryMove(basePokemon target);
 };
 
 class firePokemon1 : public firePokemon

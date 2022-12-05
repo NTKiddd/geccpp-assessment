@@ -6,7 +6,7 @@
 #include <array>
 #include <conio.h>
 
-#include "Pokedex.cpp"
+#include "Pokemon.cpp"
 
 using namespace std;
 
@@ -16,26 +16,32 @@ int main()
 
     int choice;
     int chosen[4];
+    int command;
     bool atChoosingPhase = true;
     bool choosing = true;
     bool choiceValid;
+    bool battling = true;
     char accept;
     
     string lineup[4];
 
     basePokemon aP[15] = {Flareon, Charizard, HoOh, Torkoal, Darmanitan, Blastoise, Vaporeon, Poliwrath, Swampert, Crawdaunt, Venusaur, Bayleef, Sceptile, Shiftry, Tropius};
+    firePokemon fireTrainer[5] = {Flareon, Charizard, HoOh, Torkoal, Darmanitan};
     waterPokemon waterTrainer[5] = {Blastoise, Vaporeon, Poliwrath, Swampert, Crawdaunt};
+    grassPokemon grassTrainer[5] = {Venusaur, Bayleef, Sceptile, Shiftry, Tropius};
+    basePokemon ally;
+    basePokemon opponent;
     //ifstream finname;
 
     //finname.open("AllPokemonName.txt");
 
-    /*
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    
     while (atChoosingPhase)
     {   
         for (int j = 0; j < 4;)
         {   
             cout << "Choose your Pokemons! \n";
-
             for (int i = 0; i < 15; i++)
             {    
                 switch (i)
@@ -63,20 +69,23 @@ int main()
             }
 
             choiceValid = true;
-            cin >> choice;
-            if (choice < 1 || choice > 15)
-            {   
-                cout << "Invalid. Please re-enter a valid value";
-                choiceValid = false;
-            }
-            else
+            while (choosing)
             {
-                for (int l = 0; l < 4; l++)
+                cin >> choice;
+                if (choice < 1 || choice > 15)
+                {   
+                    cout << "Invalid. Please re-enter a valid value";
+                    choiceValid = false;
+                }
+                else
                 {
-                    if (choice == chosen[l])
+                    for (int l = 0; l < 4; l++)
                     {
-                        cout << "You have chosen this Pokemon. Please choose another one. \n";
-                        choiceValid = false;
+                        if (choice == chosen[l])
+                        {
+                            cout << "You have chosen this Pokemon. Please choose another one. \n";
+                            choiceValid = false;
+                        }
                     }
                 }
             }
@@ -108,17 +117,72 @@ int main()
             }
         }
     }
+    cout << "\n" << "Your lineup: \n";
+    for (int k = 0; k < 4; k++)
+    {
+        cout << lineup[k] << "\n";
+    }
 
     cout << "Press any key to continue... \n";
     _getch();
     ClearScreen();
-    */
 
-    cout << "Your Pokemon: " << Charizard.name;
-    primaryMove(Charizard, Blastoise);
+    cout << "Choose your Opponent \n";
+    cout << "(1) Fire Trainer \n";
+    cout << "(2) Water Trainer \n";
+    cout << "(3) Grass Trainer \n";
+    cout << "(4) Final Trainer \n";
+    
+    
+    ally = Charizard;
+    opponent = Venusaur;
+    while (battling)
+    {
+        cout << "Opponent: " << opponent.name << endl;
+        cout << "Health: " << opponent.health << endl;
+        cout << "Attack: " << opponent.attack << endl;
+        cout << "Defense: " << opponent.defense << endl;
+        cout << "Stamina: " << opponent.stamina << endl << endl;
+
+        cout << "You: " << ally.name << endl;
+        cout << "Health: " << ally.health << endl;
+        cout << "Attack: " << ally.attack << endl;
+        cout << "Defense: " << ally.defense << endl;
+        cout << "Stamina: " << ally.stamina << endl << endl;
+
+        cout << "Choose your move!";
+        cin >> command;
+        switch (command)
+        {
+            case 1:
+                ally.primaryMove(opponent);
+                opponent.takeDamage(ally, command);
+                Sleep(3000);
+                ClearScreen();
+                break;
+
+            case 2:
+                //ally.secondaryMove(opponent);
+                opponent.takeDamage(ally, command);
+                Sleep(3000);
+                ClearScreen();
+                break;
+
+            case 3:
+                break;
+        }
+    }
+    
+    
 
     return 0;
 }
+
+
+
+
+
+
 
 
 void ClearScreen()
