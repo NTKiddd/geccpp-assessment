@@ -37,7 +37,7 @@ int main()
     //finname.open("AllPokemonName.txt");
 
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-    
+    /*
     while (atChoosingPhase)
     {   
         for (int j = 0; j < 4;)
@@ -124,21 +124,37 @@ int main()
     cout << "Press any key to continue... \n";
     _getch();
     ClearScreen();
-
+    */
     OpponentChoice();
-    switch (OpponentChoice())
-    {   
-        int temp[4];
-        srand(time(NULL));
-        for (int i = 0; i < 4; i++)
-        {
-            int random = 0 + (rand() % 5);
+    cout << endl << OpponentChoice();
+    int temp[4];
+    srand(time(NULL)); 
+    int start;
+    for (int i = 0; i < 4; i++)
+    {
+        while (true)
+        {      
+            switch (OpponentChoice())
+            {
+                case 1:
+                    start = 0;
+
+                case 2:
+                    start = 5;
+
+                case 3:
+                    start = 10;
+            }
+            int random = start + (rand() % 5);
+            cout << random;
             for (int j = 0; j < 4; j++)
             {
                 if (random == temp[j])
                     break;
                 else 
-                    random == temp[i];
+                    random = temp[i];
+
+                cout << temp[i];
             }
         }
     }
