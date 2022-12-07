@@ -51,8 +51,22 @@ void basePokemon::setSpeed(int newSpeed)
 
 void basePokemon::primaryMove(basePokemon target)
 {   
-    //cout << name << " use " << move << " to " << target.name;
-    //setStamina(30);
+    switch (type)
+    {
+        case 'F':
+            move = "Fire Charge";
+            break;
+
+        case 'W':
+            move = "Water Splash";
+            break;
+
+        case 'G':
+            move = "Vine Whip";
+            break;
+    }
+    cout << name << " use " << move << " to " << target.name;
+    setStamina(stamina - 10);
 }
 
 void basePokemon::takeDamage(basePokemon attacker, int moveType)
@@ -68,6 +82,7 @@ void basePokemon::takeDamage(basePokemon attacker, int moveType)
             else
                 setHealth(health - (attacker.attack - defense));
             break;
+
         case 2:
             if ((type == 'F' && attacker.type == 'W') || (type == 'W' && attacker.type == 'G') || (type == 'G' && attacker.type == 'F'))
             {
@@ -77,7 +92,6 @@ void basePokemon::takeDamage(basePokemon attacker, int moveType)
             else
                 setHealth(health - (attacker.attack * 1.4 - defense));
             break;
-
     }
 }
 
@@ -93,6 +107,18 @@ firePokemon::~firePokemon()
     
 }
 
+void firePokemon::primaryMove(basePokemon target)
+{
+    move = "Fire Charge";
+}
+
+void firePokemon::secondaryMove1(basePokemon target) 
+{
+    move = "Flamethrower";
+    cout << name << " use " << move << " to " << target.name;
+    setStamina(stamina - 15);
+}
+
 void firePokemon1::secondaryMove()
 {
 
@@ -106,6 +132,7 @@ firePokemon1::firePokemon1()
     attack = 45;
     defense = 20;
     stamina = 85;
+    speed = 40;
 }
 
 firePokemon1::~firePokemon1()
@@ -121,6 +148,7 @@ firePokemon2::firePokemon2()
     attack = 55;
     defense = 25;
     stamina = 60;
+    speed = 25;
 }
 
 firePokemon2::~firePokemon2()
@@ -136,6 +164,7 @@ firePokemon3::firePokemon3()
     attack = 50;
     defense = 15;
     stamina = 75;
+    speed = 45;
 }
 
 firePokemon3::~firePokemon3()
@@ -151,6 +180,7 @@ firePokemon4::firePokemon4()
     attack = 40;
     defense = 35;
     stamina = 60;
+    speed = 15;
 }
 
 firePokemon4::~firePokemon4()
@@ -166,6 +196,7 @@ firePokemon5::firePokemon5()
     attack = 50;
     defense = 25;
     stamina = 50;
+    speed = 20;
 }
 
 firePokemon5::~firePokemon5()
@@ -198,6 +229,7 @@ waterPokemon1::waterPokemon1()
     attack = 45;
     defense = 30;
     stamina = 70;
+    speed = 20;
 }
 
 waterPokemon1::~waterPokemon1()
@@ -213,6 +245,7 @@ waterPokemon2::waterPokemon2()
     attack = 55;
     defense = 20;
     stamina = 80;
+    speed = 30;
 }
 
 waterPokemon2::~waterPokemon2()
@@ -228,6 +261,7 @@ waterPokemon3::waterPokemon3()
     attack = 60;
     defense = 30;
     stamina = 60;
+    speed = 35;
 }
 
 waterPokemon3::~waterPokemon3()
@@ -243,6 +277,7 @@ waterPokemon4::waterPokemon4()
     attack = 55;
     defense = 20;
     stamina = 65;
+    speed = 25;
 }
 
 waterPokemon4::~waterPokemon4()
@@ -258,6 +293,7 @@ waterPokemon5::waterPokemon5()
     attack = 65;
     defense = 30;
     stamina = 80;
+    speed = 40;
 }
 
 waterPokemon5::~waterPokemon5()
@@ -290,6 +326,7 @@ grassPokemon1::grassPokemon1()
     attack = 60;
     defense = 30;
     stamina = 70;
+    speed = 25;
 }
 
 grassPokemon1::~grassPokemon1()
@@ -305,6 +342,7 @@ grassPokemon2::grassPokemon2()
     attack = 55;
     defense = 15;
     stamina = 80;
+    speed = 30;
 }
 
 grassPokemon2::~grassPokemon2()
@@ -320,6 +358,7 @@ grassPokemon3::grassPokemon3()
     attack = 70;
     defense = 30;
     stamina = 65;
+    speed = 40;
 }
 
 grassPokemon3::~grassPokemon3()
@@ -335,6 +374,7 @@ grassPokemon4::grassPokemon4()
     attack = 60;
     defense = 30;
     stamina = 60;
+    speed = 30;
 }
 
 grassPokemon4::~grassPokemon4()
@@ -350,6 +390,7 @@ grassPokemon5::grassPokemon5()
     attack = 65;
     defense = 20;
     stamina = 70;
+    speed = 10;
 }
 
 grassPokemon5::~grassPokemon5()

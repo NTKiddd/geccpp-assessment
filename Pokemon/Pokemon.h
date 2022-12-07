@@ -17,7 +17,6 @@ class basePokemon
         void setStamina(int newStamina);
         void setSpeed(int newSpeed);
 
-
         string name;
         char type;
         int id;
@@ -26,9 +25,12 @@ class basePokemon
         int defense;
         int stamina;
         int speed;
+        
+        string move;
+        int staminaCost;
+        int damage;
 
         void primaryMove(basePokemon target);
-        void thirdMove();
         void takeDamage(basePokemon attacker, int moveType);
 };
 
@@ -39,7 +41,9 @@ class firePokemon : public basePokemon
     public:
         firePokemon();
         ~firePokemon();
-        void secondaryMove(basePokemon target);
+        void primaryMove(basePokemon target);
+        void secondaryMove1(basePokemon target);
+        void secondaryMove2(basePokemon target);
 };
 
 class firePokemon1 : public firePokemon

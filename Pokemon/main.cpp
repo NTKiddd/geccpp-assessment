@@ -20,18 +20,20 @@ int main()
     int chosen[4];
     int command;
     int a;
+    int temp;
     bool atChoosingPhase = true;
     bool choosing = true;
     bool choiceValid;
     bool battling = true;
     bool fighting = true;
+    bool playerTurn;
     char accept;
     
     basePokemon lineup[4];
 
     basePokemon aP[15] = {Flareon, Charizard, HoOh, Torkoal, Darmanitan, Blastoise, Vaporeon, Poliwrath, Swampert, Crawdaunt, Venusaur, Bayleef, Sceptile, Shiftry, Tropius};
-    firePokemon fireTrainer[4];
-    waterPokemon waterTrainer[4] = {Blastoise, Vaporeon, Poliwrath, Swampert};
+    firePokemon fireTrainer[5] = {Flareon, Charizard, HoOh, Torkoal, Darmanitan};
+    waterPokemon waterTrainer[5] = {Blastoise, Vaporeon, Poliwrath, Swampert, Crawdaunt};
     grassPokemon grassTrainer[4];
     basePokemon opponent[4];
     //ifstream finname;
@@ -42,6 +44,7 @@ int main()
     
     while (atChoosingPhase)
     {   
+        SetConsoleTextAttribute(h, 15);
         for (int j = 0; j < 4;)
         {   
             cout << "Choose your Pokemons! \n";
@@ -61,8 +64,10 @@ int main()
                 }
                 for (int k = 0; k < 4; k++)
                 {
-                    if (i + 1 == chosen[k])
-                    SetConsoleTextAttribute(h, 8);
+                    if (i + 1 == chosen[k] && j > 0)
+                    {
+                        SetConsoleTextAttribute(h, 8);
+                    }
                 }
                 cout << "(" << i + 1 << ") " << aP[i].name << endl;
                 SetConsoleTextAttribute(h, 15);
@@ -160,25 +165,41 @@ int main()
     while (battling)
     {      
         cout << "Choose your Pokemon \n";
-        cin >> a;
+        for (int i = 0; i < 4; i++)
+            cout << "(" << i + 1 << ") " << lineup[i].name << endl;
+        cin >> temp;
+        a = temp - 1;
         srand(time(NULL));
         int o = 0 + (rand() % 4);
-        while (fighting)
+        if (lineup[a].speed > opponent[o].speed)
         {
+            playerTurn = true;
+            opponentTurn = false;
+        }
+        else if (lineup[a].speed < opponent[o].speed)
+        {
+            playerTurn = false;
+            opponentTurn = true;
+        }
+        while (fighting)
+        {   
+
             cout << "Opponent: " << opponent[o].name << endl;
             cout << "Health: " << opponent[o].health << endl;
             cout << "Attack: " << opponent[o].attack << endl;
             cout << "Defense: " << opponent[o].defense << endl;
             cout << "Stamina: " << opponent[o].stamina << endl << endl;
+            if (playerTurn)
+            {
+                cout << "You: " << lineup[a].name << endl;
+                cout << "Health: " << lineup[a].health << endl;
+                cout << "Attack: " << lineup[a].attack << endl;
+                cout << "Defense: " << lineup[a].defense << endl;
+                cout << "Stamina: " << lineup[a].stamina << endl << endl;
 
-            cout << "You: " << lineup[a].name << endl;
-            cout << "Health: " << lineup[a].health << endl;
-            cout << "Attack: " << lineup[a].attack << endl;
-            cout << "Defense: " << lineup[a].defense << endl;
-            cout << "Stamina: " << lineup[a].stamina << endl << endl;
-
-            cout << "Choose your move!";
-            cin >> command;
+                cout << "Choose your move!";
+                cin >> command;
+            }
             switch (command)
             {
                 case 1:
