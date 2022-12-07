@@ -16,28 +16,30 @@ int main()
     int OpponentChoice();
 
     int choice;
+    int opponentChoice;
     int chosen[4];
     int command;
+    int a;
     bool atChoosingPhase = true;
     bool choosing = true;
     bool choiceValid;
     bool battling = true;
+    bool fighting = true;
     char accept;
     
-    string lineup[4];
+    basePokemon lineup[4];
 
     basePokemon aP[15] = {Flareon, Charizard, HoOh, Torkoal, Darmanitan, Blastoise, Vaporeon, Poliwrath, Swampert, Crawdaunt, Venusaur, Bayleef, Sceptile, Shiftry, Tropius};
     firePokemon fireTrainer[4];
-    waterPokemon waterTrainer[4];
+    waterPokemon waterTrainer[4] = {Blastoise, Vaporeon, Poliwrath, Swampert};
     grassPokemon grassTrainer[4];
-    basePokemon ally;
-    basePokemon opponent;
+    basePokemon opponent[4];
     //ifstream finname;
 
     //finname.open("AllPokemonName.txt");
 
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-    /*
+    
     while (atChoosingPhase)
     {   
         for (int j = 0; j < 4;)
@@ -57,7 +59,13 @@ int main()
                         cout << endl << "GRASS \n";
                         break;
                 }
+                for (int k = 0; k < 4; k++)
+                {
+                    if (i + 1 == chosen[k])
+                    SetConsoleTextAttribute(h, 8);
+                }
                 cout << "(" << i + 1 << ") " << aP[i].name << endl;
+                SetConsoleTextAttribute(h, 15);
             }
             if (j > 0)
             {
@@ -66,7 +74,7 @@ int main()
 
             for (int k = 0; k < j; k++)
             {
-                cout << lineup[k] << "\n";
+                cout << lineup[k].name << "\n";
             }
 
             choiceValid = true;
@@ -108,7 +116,7 @@ int main()
                 {
                     case 'Y':
                         chosen[j] = choice;
-                        lineup[j] = aP[choice - 1].name;
+                        lineup[j] = aP[choice - 1];
                         j++;
                 }
                 ClearScreen();
@@ -118,109 +126,91 @@ int main()
     cout << "Your lineup: \n";
     for (int k = 0; k < 4; k++)
     {
-        cout << lineup[k] << "\n";
+        cout << lineup[k].name << "\n";
     }
 
     cout << "Press any key to continue... \n";
     _getch();
     ClearScreen();
-    */
-    OpponentChoice();
-    cout << endl << OpponentChoice();
-    int temp[4];
-    srand(time(NULL)); 
-    int start;
-    for (int i = 0; i < 4; i++)
-    {
-        while (true)
-        {      
-            switch (OpponentChoice())
-            {
-                case 1:
-                    start = 0;
-
-                case 2:
-                    start = 5;
-
-                case 3:
-                    start = 10;
-            }
-            int random = start + (rand() % 5);
-            cout << random;
-            for (int j = 0; j < 4; j++)
-            {
-                if (random == temp[j])
-                    break;
-                else 
-                    random = temp[i];
-
-                cout << temp[i];
-            }
-        }
-    }
     
-    ally = Charizard;
-    opponent = Venusaur;
-    while (battling)
-    {
-        cout << "Opponent: " << opponent.name << endl;
-        cout << "Health: " << opponent.health << endl;
-        cout << "Attack: " << opponent.attack << endl;
-        cout << "Defense: " << opponent.defense << endl;
-        cout << "Stamina: " << opponent.stamina << endl << endl;
-
-        cout << "You: " << ally.name << endl;
-        cout << "Health: " << ally.health << endl;
-        cout << "Attack: " << ally.attack << endl;
-        cout << "Defense: " << ally.defense << endl;
-        cout << "Stamina: " << ally.stamina << endl << endl;
-
-        cout << "Choose your move!";
-        cin >> command;
-        switch (command)
-        {
-            case 1:
-                ally.primaryMove(opponent);
-                break;
-
-            case 2:
-                //ally.secondaryMove(opponent);
-                break;
-
-            case 3:
-                break;
-        }
-        opponent.takeDamage(ally, command);
-        Sleep(3000);
-        ClearScreen();
-
-        if (ally.health <= 0)
-        {
-            ally.health = 0;
-            cout << "Your Pokemon has been defeated! \n";
-        }
-        else if (opponent.health <= 0)
-        {
-            opponent.health = 0;
-            cout << "Opponent's Pokemon has been defeated! \n";
-        }
-    }
-    return 0;
-}
-
-int OpponentChoice()
-{
+    
     cout << "Choose your Opponent \n";
     cout << "(1) Fire Trainer \n";
     cout << "(2) Water Trainer \n";
     cout << "(3) Grass Trainer \n";
     cout << "(4) Final Trainer \n";
 
-    int choice;
-    cin >> choice;
+    cin >> opponentChoice;
 
-    return choice;
+    for (int i = 0; i < 4; i++)
+    {   
+        switch (opponentChoice)
+        {
+            case 1:
+                opponent[i] = fireTrainer[i];
+                break;
+            case 2:
+                opponent[i] = waterTrainer[i];
+                break;
+            case 3:
+                opponent[i] = grassTrainer[i];
+        }
+        cout << opponent[i].name << endl;
+    }
+    while (battling)
+    {      
+        cout << "Choose your Pokemon \n";
+        cin >> a;
+        srand(time(NULL));
+        int o = 0 + (rand() % 4);
+        while (fighting)
+        {
+            cout << "Opponent: " << opponent[o].name << endl;
+            cout << "Health: " << opponent[o].health << endl;
+            cout << "Attack: " << opponent[o].attack << endl;
+            cout << "Defense: " << opponent[o].defense << endl;
+            cout << "Stamina: " << opponent[o].stamina << endl << endl;
+
+            cout << "You: " << lineup[a].name << endl;
+            cout << "Health: " << lineup[a].health << endl;
+            cout << "Attack: " << lineup[a].attack << endl;
+            cout << "Defense: " << lineup[a].defense << endl;
+            cout << "Stamina: " << lineup[a].stamina << endl << endl;
+
+            cout << "Choose your move!";
+            cin >> command;
+            switch (command)
+            {
+                case 1:
+                    lineup[a].primaryMove(opponent[o]);
+                    break;
+
+                case 2:
+                    //ally.secondaryMove(opponent);
+                    break;
+
+                case 3:
+                    break;
+            }
+            opponent[o].takeDamage(lineup[a], command);
+            Sleep(3000);
+            ClearScreen();
+
+            if (lineup[a].health <= 0)
+            {
+                lineup[a].health = 0;
+                cout << "Your Pokemon has been defeated! \n";
+            }
+            else if (opponent[o].health <= 0)
+            {
+                opponent[o].health = 0;
+                cout << "Opponent's Pokemon has been defeated! \n";
+            }
+        }
+    } 
+    return 0;
 }
+
 
 
 
